@@ -1,13 +1,11 @@
 version: 2
-jobs:
-  test:
-    docker:
-      - run:
-          name: Install dependencies
-          command: terraform init
-      
-workflows:
-  version: 2
-  ultimate_pipeline:
-    jobs:
-      - test
+
+references:
+
+terraform_init: &terraform_init
+  run:
+    name: terraform init
+    command: |
+      source $BASH_ENV
+      cd environments/$TERRAFORM_ENVIRONMENT
+      terraform init
