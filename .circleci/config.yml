@@ -1,6 +1,5 @@
 version: 2.1
-orbs:
-  tf: bankrate/terraform@1.1.2
+
 workflows:
   tf:
     jobs:
