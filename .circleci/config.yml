@@ -9,11 +9,6 @@ terraform_init: &terraform_init
       terraform init
 apply_job: &apply_job
   steps:
-    - *restore_repo
-    - *set_terraform_environment
-    - *terraform_init
-    - attach_workspace:
-        at: *working_directory
     - run:
         name: terraform apply
         command: |
