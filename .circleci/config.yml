@@ -11,10 +11,7 @@ jobs:
     working_directory: ~/gcp/terraform
     steps:
       - run:
-          name: Test
-          command: |
-             
-            terraform init
+          command: terraform init
 
 
 
