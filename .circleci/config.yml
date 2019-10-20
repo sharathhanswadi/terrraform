@@ -1,18 +1,21 @@
 
-# Golang CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-go/ for more details
 version: 2
-jobs:
-  build:
-    docker:
-      - image: circleci/golang:1.10     
-    # only build the circleci branch for 
-    working_directory: ~/gcp/terraform
-    steps:
-      - run:
-          command: terraform init
+
+references:
 
 
+base_image: &base_image
+  hashicorp/terraform:light
 
-     
+
+working_directory: &working_directory
+  ~/gcp/terraform
+
+
+terraform_init: &terraform_init
+  run:
+    name: terraform init
+    command: |
+
+      terraform init
+
