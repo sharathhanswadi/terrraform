@@ -10,5 +10,12 @@ jobs:
     # only build the circleci branch for 
     working_directory: ~/gcp/terraform
     steps:
-      - run: terraform init
+      - run:
+          name: Test
+          command: |
+             
+            terraform init
+
+
+
      
