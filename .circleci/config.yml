@@ -5,6 +5,8 @@
 version: 2
 jobs:
   build:
+    docker:
+      - image: circleci/golang:1.10     
     # only build the circleci branch for 
     working_directory: ~/gcp/terraform
     steps:
