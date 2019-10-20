@@ -19,3 +19,9 @@ terraform_init: &terraform_init
 
       terraform init
 
+
+apply_job: &apply_job
+  steps:
+    - *terraform_init
+    - attach_workspace:
+        at: *working_directory
