@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  tf: ngs/terraform@0.0.1
+  tf: bankrate/terraform@1.1.2
 workflows:
   tf:
     jobs:
