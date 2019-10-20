@@ -45,7 +45,7 @@ terraform_init: &terraform_init
     name: terraform init
     command: |
       source $BASH_ENV
-      cd environments/$TERRAFORM_ENVIRONMENT
+      cd terraform
       terraform init
 apply_job: &apply_job
   <<: *default_config
