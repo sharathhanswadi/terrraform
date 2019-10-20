@@ -1,17 +1,13 @@
 version: 2
-
-terraform_init: &terraform_init
-  run:
-    name: terraform init
-    command: |
-      source $BASH_ENV
-      cd environments/$TERRAFORM_ENVIRONMENT
-      terraform init
-apply_job: &apply_job
-  steps:
-    - run:
-        name: terraform apply
-        command: |
-          source $BASH_ENV
-          cd environments/$TERRAFORM_ENVIRONMENT
-          terraform apply --auto-approve ../../terraform.pla
+jobs:
+  test:
+    docker:
+      - run:
+          name: Install dependencies
+          command: terraform init
+      
+workflows:
+  version: 2
+  ultimate_pipeline:
+    jobs:
+      - test
