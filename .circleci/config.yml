@@ -8,7 +8,6 @@ terraform_init: &terraform_init
       cd environments/$TERRAFORM_ENVIRONMENT
       terraform init
 apply_job: &apply_job
-  <<: *default_config
   steps:
     - *restore_repo
     - *set_terraform_environment
