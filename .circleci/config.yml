@@ -59,7 +59,7 @@ apply_job: &apply_job
         name: terraform apply
         command: |
           source $BASH_ENV
-          cd environments/$TERRAFORM_ENVIRONMENT
+          cd terraform
           terraform apply --auto-approve ../../terraform.plan
 jobs:
 
@@ -72,7 +72,7 @@ jobs:
           name: terraform fmt
           command: |
             source $BASH_ENV
-            cd environments/$TERRAFORM_ENVIRONMENT
+            cd terraform
             if [ $(terraform fmt | grep -v .terraform | tee fmt_result.txt | wc -l) -gt 0 ]; then
               echo "Format of this terraform files is not appropiate:"
               echo
@@ -95,7 +95,7 @@ jobs:
           name: terraform plan
           command: |
             source $BASH_ENV
-            cd environments/$TERRAFORM_ENVIRONMENT
+            cd terraform
             terraform plan -out=../../terraform.plan
       - persist_to_workspace:
           root: *working_directory
