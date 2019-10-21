@@ -35,5 +35,4 @@ jobs:
     steps:
       - checkout
       - init
-      - tf:
-          command: validate
+    
