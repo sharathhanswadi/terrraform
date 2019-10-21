@@ -19,6 +19,6 @@ jobs:
     steps:
       - checkout:
           path:  ~/gcp            
-      - run: terraform init
+      - run: cd ~/gcp &&  terraform init
       - run: pwd   
      
