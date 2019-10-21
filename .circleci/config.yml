@@ -41,8 +41,11 @@ terraform_init: &terraform_init
 jobs:
 
   build:
+    docker:
+      - image: hashicorp/terraform:light      
 
-    steps:
-      - checkout
-      - run: terraform init  
+    steps:            
+      - run: terraform init
+      - attach_workspace:
+          at: *working_directory  
      
