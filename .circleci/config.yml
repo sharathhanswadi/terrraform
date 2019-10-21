@@ -1,59 +1,34 @@
-
 version: 2
 
-references:
-
-base_image: &base_image
-  hashicorp/terraform:light
-
-working_directory: &working_directory
-  ~/terrraform
-
-set_terraform_environment: &set_terraform_environment
-  run:
-    name: set terraform environment
-    command: |
-      cd && touch $BASH_ENV
-
-      if [ "${CIRCLE_BRANCH}" == "master" ]; then
-        echo 'export TERRAFORM_ENVIRONMENT=production' >> $BASH_ENV
-      else
-        echo 'export TERRAFORM_ENVIRONMENT=staging' >> $BASH_ENV
-      fi
-
-
-
-default_config: &default_config
-  docker:
-    - image: base_image
-  working_directory: working_directory
-  environment:
-    BASH_ENV: /root/.bashrc
-
-terraform_init: &terraform_init
-  run:
-    name: terraform init
-    command: |
-      source $BASH_ENV
-      cd environments/$TERRAFORM_ENVIRONMENT
-      terraform init
+terraform: &terraform
+  docker
+    -  image: hashicorp/terraform:0.12.0
+  working_directory: /tmp/workspace/terraform
 
 
 jobs:
-
-  build: 
-    docker:
-      - image: hashicorp/terraform
-    working_directory:  ~/terrraform/terraform
-    steps:
+  validate:
+    <<: *terraform
+    steps
       - checkout
-      - *set_terraform_environment 
-      - run: terraform init
-      - run:  
-          name: checkout 
-          command: |
-            source $BASH_ENV
-            terraform plan -out=../../terraform.plan
-
+      - run:
+          name: terraform init
+          command: find . -type f -name "*.tf" -exec dirname {} \;|sort -u | while read m; do (cd "$m" && terraform init -input=false -backend=false) || exit 1; done
+      - run: 
+          name: terraform plan 
+          command: find . -type f -name "*.tf" -exec dirname {} \;|sort -u | while read m; do (cd "$m" && terraform plan -input=false -backend=false) || exit 1; done
       - persist_to_workspace:
-          root: working_directory    
+          root: .
+          paths: .
+
+
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - validate
+#      - plan_examples
+#      - approve
+#      - release
+
