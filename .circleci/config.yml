@@ -38,8 +38,5 @@ workflows:
   build:
     jobs:
       - validate
-#      - plan_examples
-#      - approve
-#      - release
 
 
