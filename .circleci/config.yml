@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - checkout:
-          path:  ~/gcp/terraform            
+          path:  ~/gcp            
       - run: terraform init
       - run: terraform plan
       - run: terraform apply   
