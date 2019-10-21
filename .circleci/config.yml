@@ -44,8 +44,8 @@ jobs:
     docker:
       - image: hashicorp/terraform:light      
 
-    steps:            
+    steps:
+      - checkout:
+          path:  ~/gcp/terraform            
       - run: terraform init
-      - attach_workspace:
-          at: *working_directory  
      
