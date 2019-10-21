@@ -34,4 +34,6 @@ jobs:
     working_directory:  ~/terrraform/terraform
     steps: 
       - run: terraform init
-      - run:  terraform plan   
+      - run:  terraform plan
+      - persist_to_workspace:
+          root: working_directory    
