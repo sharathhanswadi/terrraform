@@ -29,19 +29,9 @@ terraform_init: &terraform_init
 jobs:
 
   build: 
-
-
-  plan: 
-
+    docker:
+      - image: hashicorp/terraform
+    working_directory:  ~/terrraform
     steps: 
-      - terraform_init
-      - run: 
-          name: terraform plan
-          command: | 
-            cd terraform
-            terraform init 
-            terraform plan -out=../../terraform.plan
-      - persist_to_workspace:
-          root: working_directory
-          paths: 
-            - terraform.plan 
+      - run: cd terraform  && terraform init
+      - run: cd  terraform && terraform plan   
