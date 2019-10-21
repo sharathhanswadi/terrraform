@@ -17,6 +17,6 @@ jobs:
       - image: hashicorp/terraform:light      
 
     steps:        
-      - run: cd ~/terraform &&  terraform init
-      - run: cd ~/terraform && terraform plan
+      - run: cd ~/project/terrraform/terraform &&  terraform init
+      - run: cd cd ~/project/terrraform/terraform && terraform plan
       - run: cd ~/terraform && terraform apply       
