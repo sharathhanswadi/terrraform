@@ -7,35 +7,7 @@ version: 2
 
 description: Lightweight Terraform Orb, not intended for generic use
 
-executors:
-  terraform:
-    docker:
-      - image: hashicorp/terraform:light
-    working_directory:  ~/gcp/terraform
 
-
-
-
-commands:
-  tf:
-    parameters:
-      command:
-        type: string
-    steps:
-      - run:
-          name: terraform << parameters.command >>
-          command: terraform << parameters.command >>
-
-
-
-
-terraform_init: &terraform_init
-  run:
-    name: terraform init
-    command: |
-      source $BASH_ENV
-      cd environments/$TERRAFORM_ENVIRONMENT
-      terraform init
 
     
 jobs:
