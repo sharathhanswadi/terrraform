@@ -31,7 +31,7 @@ jobs:
   build: 
     docker:
       - image: hashicorp/terraform
-    working_directory:  ~/terrraform
+    working_directory:  ~/terrraform/terraform
     steps: 
-      - run: cd terraform  && terraform init
-      - run: cd  terraform && terraform plan   
+      - run: terraform init
+      - run:  terraform plan   
