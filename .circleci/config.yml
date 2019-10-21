@@ -20,6 +20,5 @@ jobs:
       - checkout:
           path:  ~/gcp            
       - run: terraform init
-      - run: terraform plan
-      - run: terraform apply   
+      - run: pwd   
      
