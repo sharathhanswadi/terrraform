@@ -38,9 +38,9 @@ jobs:
       - run: 
           name: terraform plan
           command: | 
-          cd terraform
-          terraform init 
-          terraform plan -out=../../terraform.plan
+            cd terraform
+            terraform init 
+            terraform plan -out=../../terraform.plan
       - persist_to_workspace:
           root: working_directory
           paths: 
