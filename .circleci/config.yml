@@ -4,6 +4,13 @@ version: 2
 references:
 
 
+default_config: &default_config
+  docker:
+    - image: *base_image
+  working_directory: *working_directory
+  environment:
+    BASH_ENV: /root/.bashrc
+
 base_image: &base_image
   hashicorp/terraform:light
 
