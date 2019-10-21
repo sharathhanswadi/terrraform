@@ -9,6 +9,19 @@ base_image: &base_image
 working_directory: &working_directory
   ~/terrraform
 
+set_terraform_environment: &set_terraform_environment
+  run:
+    name: set terraform environment
+    command: |
+      cd && touch $BASH_ENV
+
+      if [ "${CIRCLE_BRANCH}" == "master" ]; then
+        echo 'export TERRAFORM_ENVIRONMENT=production' >> $BASH_ENV
+      else
+        echo 'export TERRAFORM_ENVIRONMENT=staging' >> $BASH_ENV
+      fi
+
+
 
 default_config: &default_config
   docker:
@@ -32,7 +45,9 @@ jobs:
     docker:
       - image: hashicorp/terraform
     working_directory:  ~/terrraform/terraform
-    steps: 
+    steps:
+      - checkout
+      - *set_terraform_environment 
       - run: terraform init
       - run:  terraform plan
       - persist_to_workspace:
