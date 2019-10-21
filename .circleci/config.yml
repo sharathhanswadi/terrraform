@@ -2,7 +2,8 @@
 
 
 
-version: 2.1
+version: 2
+
 
 description: Lightweight Terraform Orb, not intended for generic use
 
@@ -26,10 +27,6 @@ commands:
           command: terraform << parameters.command >>
 
 
- init:
-    steps:
-      - tf:
-          command: init
 
 
 jobs:
