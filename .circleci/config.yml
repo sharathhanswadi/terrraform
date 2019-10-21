@@ -19,5 +19,10 @@ jobs:
     steps:
       - checkout:
           path:  ~/gcp/terraform            
-      - run: terraform init
+      - run: 
+          name: terraform 
+          commamd: |
+            terraform init
+            terraform plan 
+            terraform apply 
      

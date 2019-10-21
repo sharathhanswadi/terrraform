@@ -1,0 +1,32 @@
+
+version: 2.1
+
+references:
+
+
+base_image: &base_image
+  hashicorp/terraform:light
+
+
+
+working_directory: &working_directory
+  ~/gcp/terraform
+
+
+commands:
+
+  my-command:
+
+    steps:
+    
+      - run: terraform init
+   
+
+
+jobs:
+
+  my-job:
+
+    steps:
+
+      -my-command
