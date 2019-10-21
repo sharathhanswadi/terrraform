@@ -18,5 +18,4 @@ jobs:
 
     steps:        
       - run: cd ~/gcp &&  terraform init
-      - run: cd ~/gcp && terraform plan    
-      - run: cd ~/gcp && terraform apply  
+      - run: cd ~/gcp && terraform plan      
