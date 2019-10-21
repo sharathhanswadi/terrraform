@@ -1,20 +1,47 @@
 
-
-
-
 version: 2
 
+references:
 
-description: Lightweight Terraform Orb, not intended for generic use
+base_image: &base_image
+  hashicorp/terraform:light
+
+working_directory: &working_directory
+  ~/terrraform
 
 
+default_config: &default_config
+  docker:
+    - image: base_image
+  working_directory: working_directory
+  environment:
+    BASH_ENV: /root/.bashrc
 
-    
+terraform_init: &terraform_init
+  run:
+    name: terraform init
+    command: |
+      source $BASH_ENV
+      cd environments/$TERRAFORM_ENVIRONMENT
+      terraform init
+
+
 jobs:
 
-  build:
-    docker:
-      - image: hashicorp/terraform:light      
+  build: 
 
-    steps:        
-      - run: ls -ltrh      
+
+  plan: 
+
+    steps: 
+      - terraform_init
+      - run: 
+          name: terraform plan
+          command: | 
+          cd terraform
+          terraform init 
+          terraform plan -out=../../terraform.plan
+      - persist_to_workspace:
+          root: working_directory
+          paths: 
+            - terraform.plan 
