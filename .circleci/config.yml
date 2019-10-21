@@ -16,9 +16,7 @@ jobs:
     docker:
       - image: hashicorp/terraform:light      
 
-    steps:
-      - checkout:
-          path:  ~/gcp            
+    steps:        
       - run: cd ~/gcp &&  terraform init
       - run: cd ~/gcp && terraform plan    
-     
+      - run: cd ~/gcp && terraform apply  
