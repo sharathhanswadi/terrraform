@@ -1,6 +1,6 @@
 
 provider "google" {
-  credentials = "$sharath"
+  credentials = "$var.file"
   project = "flask-app-211918-256610"
   region      = "us-west1"
 }
