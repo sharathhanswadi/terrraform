@@ -1,34 +1,42 @@
 
-version: 2
-
-references:
 
 
-default_config: &default_config
-  docker:
-    - image: *base_image
-  working_directory: *working_directory
-  environment:
-    BASH_ENV: /root/.bashrc
 
-base_image: &base_image
-  hashicorp/terraform:light
+version: 2.1
 
+description: Lightweight Terraform Orb, not intended for generic use
 
-working_directory: &working_directory
-  ~/gcp/terraform
+executors:
+  terraform:
+    docker:
+      - image: hashicorp/terraform:light
+    working_directory:  ~/gcp/terraform
 
 
-terraform_init: &terraform_init
-  run:
-    name: terraform init
-    command: |
-
-      terraform init
 
 
-apply_job: &apply_job
-  steps:
-    - *terraform_init
-    - attach_workspace:
-        at: *working_directory
+commands:
+  tf:
+    parameters:
+      command:
+        type: string
+    steps:
+      - run:
+          name: terraform << parameters.command >>
+          command: terraform << parameters.command >>
+
+
+ init:
+    steps:
+      - tf:
+          command: init
+
+
+jobs:
+  validate:
+    executor: terraform
+    steps:
+      - checkout
+      - init
+      - tf:
+          command: validate
