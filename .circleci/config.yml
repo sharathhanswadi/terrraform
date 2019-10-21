@@ -30,9 +30,6 @@ commands:
 
 
 jobs:
-  validate:
-    executor: terraform
     steps:
-      - checkout
-      - init
+      - terraform init
     
