@@ -1,6 +1,6 @@
 
 provider "google" {
-  credentials = "${file("flask-app-211918-256610-61d6c8f0e5b1.json")}"
+  credentials = "$sharath"
   project = "flask-app-211918-256610"
   region      = "us-west1"
 }
