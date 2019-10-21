@@ -49,6 +49,11 @@ jobs:
       - checkout
       - *set_terraform_environment 
       - run: terraform init
-      - run:  terraform plan
+      - run:  
+          name: checkout 
+          command: |
+            source $BASH_ENV
+            terraform plan -out=../../terraform.plan
+
       - persist_to_workspace:
           root: working_directory    
