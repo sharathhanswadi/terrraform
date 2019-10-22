@@ -2,7 +2,7 @@
 provider "google" {
   credentials =  "flask-app-211918-256610-61d6c8f0e5b1.json"
   project = "flask-app-211918-256610"
-  region      = "us-west1"
+  region      = "us-west-1"
 }
 
 
@@ -20,7 +20,7 @@ resource "random_id" "instance_id" {
 // A single Google Cloud Engine instance
 resource "google_compute_instance" "default" {
   name         = "flask-vm-${random_id.instance_id.hex}"
-  machine_type = "g1-small"
+  machine_type = "f1-micro"
   zone         = "us-west1-b"
 
   boot_disk {
